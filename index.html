@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OriginAnecdote | International Teacher Dashboard</title>
+  <meta name="description" content="OriginAnecdote: Premium class booking and availability dashboard designed specifically for teachers with international students. Manage schedules across time zones.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo-icon">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <span class="logo-text">Origin<span>Anecdote</span></span>
+      </div>
+      
+      <nav class="nav-menu">
+        <a href="#" class="nav-item active" data-tab="dashboard" id="nav-dashboard">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="schedule" id="nav-schedule">
+          <i class="fa-solid fa-calendar-days"></i>
+          <span>Schedule & Slots</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="students" id="nav-students">
+          <i class="fa-solid fa-user-graduate"></i>
+          <span>My Students</span>
+          <span class="badge badge-students-count">18</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="insights" id="nav-insights">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Earnings & Insights</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="settings" id="nav-settings">
+          <i class="fa-solid fa-sliders"></i>
+          <span>Settings</span>
+        </a>
+      </nav>
+      
+      <div class="teacher-profile-card">
+        <div class="avatar-container">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=150" alt="Sarah Miller Profile Picture" class="avatar">
+          <span class="status-dot online"></span>
+        </div>
+        <div class="profile-info">
+          <span class="profile-name">Prof. Sarah Miller</span>
+          <span class="profile-role">ESL Instructor</span>
+        </div>
+        <button class="settings-quick-btn" aria-label="Quick Settings"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+      </div>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-left">
+          <h1 id="page-title">Welcome back, Sarah!</h1>
+          <p class="subtitle" id="page-subtitle">Here is what's happening with your international classes today.</p>
+        </div>
+        
+        <div class="header-right">
+          <!-- Timezone Live Card -->
+          <div class="header-timezone-card" id="header-timezone-card">
+            <div class="timezone-flag-row">
+              <span class="live-clock-icon"><i class="fa-solid fa-earth-americas fa-spin-slow"></i></span>
+              <div class="timezone-details">
+                <span class="timezone-label">Teacher Timezone</span>
+                <span class="timezone-name" id="teacher-timezone-display">Asia/Tokyo (JST, GMT+9)</span>
+              </div>
+            </div>
+            <div class="live-time" id="teacher-live-clock">10:04:12 AM</div>
+          </div>
+          
+          <!-- Notifications -->
+          <div class="notification-wrapper">
+            <button class="icon-btn" id="notification-bell" aria-label="Notifications">
+              <i class="fa-solid fa-bell"></i>
+              <span class="notification-badge">3</span>
+            </button>
+            <div class="notification-dropdown hidden" id="notification-dropdown">
+              <div class="dropdown-header">
+                <h3>Notifications</h3>
+                <a href="#" class="mark-all-read">Mark all read</a>
+              </div>
+              <ul class="notification-list">
+                <li class="notification-item unread">
+                  <div class="notif-icon-wrapper check"><i class="fa-solid fa-check"></i></div>
+                  <div class="notif-content">
+                    <p class="notif-text"><strong>Mateo Silva (🇧🇷 Brazil)</strong> booked a new class for Friday.</p>
+                    <span class="notif-time">5 mins ago</span>
+                  </div>
+                </li>
+                <li class="notification-item unread">
+                  <div class="notif-icon-wrapper calendar"><i class="fa-solid fa-calendar-plus"></i></div>
+                  <div class="notif-content">
+                    <p class="notif-text"><strong>Chloe Dubois (🇫🇷 France)</strong> requested a reschedule for Saturday.</p>
+                    <span class="notif-time">1 hour ago</span>
+                  </div>
+                </li>
+                <li class="notification-item">
+                  <div class="notif-icon-wrapper star"><i class="fa-solid fa-star"></i></div>
+                  <div class="notif-content">
+                    <p class="notif-text"><strong>Yuki Tanaka (🇯🇵 Japan)</strong> left a 5-star review: "Excellent lesson!"</p>
+                    <span class="notif-time">Yesterday</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+        </div>
+      </header>
+      
+      <!-- Views Container -->
+      <div class="view-panel-container">
+        
+        <!-- DASHBOARD VIEW -->
+        <section class="view-panel active" id="view-dashboard">
+          
+          <!-- Stats Summary Cards -->
+          <div class="stats-grid">
+            <div class="stat-card glass-panel">
+              <div class="stat-icon-wrapper primary">
+                <i class="fa-solid fa-clock"></i>
+              </div>
+              <div class="stat-data">
+                <span class="stat-val">124 hrs</span>
+                <span class="stat-lbl">Teaching Hours</span>
+                <span class="stat-trend trend-up"><i class="fa-solid fa-arrow-up"></i> +12 hrs this week</span>
+              </div>
+            </div>
+            
+            <div class="stat-card glass-panel">
+              <div class="stat-icon-wrapper success">
+                <i class="fa-solid fa-users"></i>
+              </div>
+              <div class="stat-data">
+                <span class="stat-val">18</span>
+                <span class="stat-lbl">Active Students</span>
+                <span class="stat-trend"><i class="fa-solid fa-globe"></i> From 7 countries</span>
+              </div>
+            </div>
+            
+            <div class="stat-card glass-panel highlight-border">
+              <div class="stat-icon-wrapper warning pulse-icon">
+                <i class="fa-solid fa-hourglass-half"></i>
+              </div>
+              <div class="stat-data">
+                <span class="stat-val" id="countdown-timer">01h 14m</span>
+                <span class="stat-lbl">Next Class Countdown</span>
+                <span class="stat-trend" id="countdown-student-details">with Yuki Tanaka 🇯🇵</span>
+              </div>
+            </div>
+            
+            <div class="stat-card glass-panel">
+              <div class="stat-icon-wrapper info">
+                <i class="fa-solid fa-wallet"></i>
+              </div>
+              <div class="stat-data">
+                <span class="stat-val">$3,420</span>
+                <span class="stat-lbl">Monthly Earnings</span>
+                <span class="stat-trend trend-up"><i class="fa-solid fa-arrow-up"></i> +8% vs last month</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Two Column Content -->
+          <div class="dashboard-details-grid">
+            
+            <!-- Column Left: Classroom Focus & Upcoming Queue -->
+            <div class="dashboard-col-left flex-col gap-6">
+              
+              <!-- Active Class Workspace -->
+              <div class="glass-panel active-class-card">
+                <div class="badge-status-tag">UPCOMING NOW</div>
+                <div class="active-class-header">
+                  <div class="active-student-profile">
+                    <div class="student-avatar text-avatar red-bg">YT</div>
+                    <div class="student-info-brief">
+                      <h3>Yuki Tanaka <span class="flag-icon">🇯🇵</span></h3>
+                      <span class="student-country-label">Tokyo, Japan (GMT+9) • Local Time: <span class="student-live-clock" data-tz="Asia/Tokyo">10:04 AM</span></span>
+                    </div>
+                  </div>
+                  <div class="active-class-meta">
+                    <span class="class-time-badge"><i class="fa-regular fa-clock"></i> 11:30 AM - 12:30 PM (Your Time)</span>
+                  </div>
+                </div>
+                
+                <div class="active-class-body">
+                  <div class="class-details-row">
+                    <div class="detail-box">
+                      <span class="detail-label">Lesson Topic</span>
+                      <span class="detail-value">Business Presentation Prep</span>
+                    </div>
+                    <div class="detail-box">
+                      <span class="detail-label">Student Level</span>
+                      <span class="detail-value text-level-b2">Intermediate (B2)</span>
+                    </div>
+                    <div class="detail-box">
+                      <span class="detail-label">Materials</span>
+                      <span class="detail-value link-style"><i class="fa-solid fa-file-pdf"></i> Slides_FinTech.pdf</span>
+                    </div>
+                  </div>
+                  
+                  <div class="class-notes-summary">
+                    <strong>Lesson Notes:</strong> Focus on pronunciation of financial vocabulary and transitions in speech. Yuki has a presentation to European stakeholders next Tuesday.
+                  </div>
+                </div>
+                
+                <div class="active-class-footer">
+                  <button class="btn btn-secondary"><i class="fa-solid fa-pen-to-square"></i> Edit Notes</button>
+                  <button class="btn btn-primary btn-glow" id="join-classroom-btn"><i class="fa-solid fa-video"></i> Launch Virtual Classroom</button>
+                </div>
+              </div>
+              
+              <!-- Upcoming Lessons Queue -->
+              <div class="glass-panel">
+                <div class="panel-header-row">
+                  <h2>Today's Lessons Queue</h2>
+                  <span class="pill-badge">3 Scheduled</span>
+                </div>
+                
+                <div class="lessons-queue-list">
+                  
+                  <!-- Queue Item 1 -->
+                  <div class="queue-item">
+                    <div class="queue-student-details">
+                      <div class="student-avatar text-avatar blue-bg">MS</div>
+                      <div class="queue-info">
+                        <h4>Mateo Silva <span class="flag-icon">🇧🇷</span></h4>
+                        <span class="level-pill a2-level">Beginner (A2)</span>
+                      </div>
+                    </div>
+                    <div class="queue-time-info">
+                      <span class="teacher-scheduled-time">14:00 - 15:00 <span class="time-zone-sub">(JST)</span></span>
+                      <span class="student-scheduled-time">02:00 - 03:00 <span class="time-zone-sub">(GMT-3) ⚠️ Night</span></span>
+                    </div>
+                    <div class="queue-topic">
+                      <span class="topic-title">Everyday Conversational English</span>
+                    </div>
+                    <div class="queue-actions">
+                      <button class="icon-btn-secondary" title="Send Message" aria-label="Message"><i class="fa-solid fa-comment"></i></button>
+                      <button class="btn btn-sm btn-outline-primary">Prep</button>
+                    </div>
+                  </div>
+                  
+                  <!-- Queue Item 2 -->
+                  <div class="queue-item">
+                    <div class="queue-student-details">
+                      <div class="student-avatar text-avatar purple-bg">CD</div>
+                      <div class="queue-info">
+                        <h4>Chloe Dubois <span class="flag-icon">🇫🇷</span></h4>
+                        <span class="level-pill c1-level">Advanced (C1)</span>
+                      </div>
+                    </div>
+                    <div class="queue-time-info">
+                      <span class="teacher-scheduled-time">18:30 - 19:30 <span class="time-zone-sub">(JST)</span></span>
+                      <span class="student-scheduled-time">11:30 - 12:30 <span class="time-zone-sub">(GMT+2)</span></span>
+                    </div>
+                    <div class="queue-topic">
+                      <span class="topic-title">C1 Cambridge Exam Training</span>
+                    </div>
+                    <div class="queue-actions">
+                      <button class="icon-btn-secondary" title="Send Message" aria-label="Message"><i class="fa-solid fa-comment"></i></button>
+                      <button class="btn btn-sm btn-outline-primary">Prep</button>
+                    </div>
+                  </div>
+                  
+                  <!-- Queue Item 3 -->
+                  <div class="queue-item">
+                    <div class="queue-student-details">
+                      <div class="student-avatar text-avatar teal-bg">LX</div>
+                      <div class="queue-info">
+                        <h4>Li Wei <span class="flag-icon">🇨🇳</span></h4>
+                        <span class="level-pill b1-level">Intermediate (B1)</span>
+                      </div>
+                    </div>
+                    <div class="queue-time-info">
+                      <span class="teacher-scheduled-time">21:00 - 21:30 <span class="time-zone-sub">(JST)</span></span>
+                      <span class="student-scheduled-time">20:00 - 20:30 <span class="time-zone-sub">(GMT+8)</span></span>
+                    </div>
+                    <div class="queue-topic">
+                      <span class="topic-title">Vocabulary & Idiomatic Expressions</span>
+                    </div>
+                    <div class="queue-actions">
+                      <button class="icon-btn-secondary" title="Send Message" aria-label="Message"><i class="fa-solid fa-comment"></i></button>
+                      <button class="btn btn-sm btn-outline-primary">Prep</button>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+              
+            </div>
+            
+            <!-- Column Right: Booking Requests & Quick Actions -->
+            <div class="dashboard-col-right flex-col gap-6">
+              
+              <!-- Pending Booking Requests -->
+              <div class="glass-panel">
+                <div class="panel-header-row">
+                  <h2>Pending Booking Requests</h2>
+                  <span class="notification-badge-inline" id="pending-requests-count">2</span>
+                </div>
+                
+                <div class="booking-requests-list" id="booking-requests-list">
+                  <!-- Dynamic content loaded via JS, showing static requests first -->
+                  <div class="booking-request-card" id="request-1">
+                    <div class="req-header">
+                      <div class="student-avatar text-avatar orange-bg">AA</div>
+                      <div class="req-student-info">
+                        <h4>Amara Awolowo <span class="flag-icon">🇳🇬</span></h4>
+                        <span class="req-subtitle">Lagos, Nigeria (GMT+1) • IELTS Prep</span>
+                      </div>
+                    </div>
+                    <div class="req-time-comparison">
+                      <div class="time-comp-box">
+                        <span class="comp-label">Your Time (JST)</span>
+                        <span class="comp-val">Fri, June 26 @ 15:00</span>
+                      </div>
+                      <div class="time-comp-divider"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+                      <div class="time-comp-box">
+                        <span class="comp-label">Student Time</span>
+                        <span class="comp-val">Fri, June 26 @ 07:00</span>
+                      </div>
+                    </div>
+                    <div class="req-tz-alert warning-msg">
+                      <i class="fa-solid fa-circle-info"></i> Standard timezone overlap. Time is early morning (7:00 AM) for student.
+                    </div>
+                    <div class="req-actions">
+                      <button class="btn btn-sm btn-danger btn-decline-req" data-id="1">Decline</button>
+                      <button class="btn btn-sm btn-outline-secondary btn-resched-req" data-id="1">Suggest Time</button>
+                      <button class="btn btn-sm btn-success btn-accept-req" data-id="1">Approve Class</button>
+                    </div>
+                  </div>
+                  
+                  <div class="booking-request-card" id="request-2">
+                    <div class="req-header">
+                      <div class="student-avatar text-avatar pink-bg">HK</div>
+                      <div class="req-student-info">
+                        <h4>Hans Koch <span class="flag-icon">🇩🇪</span></h4>
+                        <span class="req-subtitle">Berlin, Germany (GMT+2) • Business Conversation</span>
+                      </div>
+                    </div>
+                    <div class="req-time-comparison">
+                      <div class="time-comp-box">
+                        <span class="comp-label">Your Time (JST)</span>
+                        <span class="comp-val">Sat, June 27 @ 17:00</span>
+                      </div>
+                      <div class="time-comp-divider"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+                      <div class="time-comp-box">
+                        <span class="comp-label">Student Time</span>
+                        <span class="comp-val">Sat, June 27 @ 10:00</span>
+                      </div>
+                    </div>
+                    <div class="req-tz-alert success-msg">
+                      <i class="fa-solid fa-circle-check"></i> Great overlap! 10:00 AM matches Hans's weekend study preferences.
+                    </div>
+                    <div class="req-actions">
+                      <button class="btn btn-sm btn-danger btn-decline-req" data-id="2">Decline</button>
+                      <button class="btn btn-sm btn-outline-secondary btn-resched-req" data-id="2">Suggest Time</button>
+                      <button class="btn btn-sm btn-success btn-accept-req" data-id="2">Approve Class</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Quick Stats Map/Country Insights -->
+              <div class="glass-panel">
+                <div class="panel-header-row">
+                  <h2>Student Geographic Reach</h2>
+                </div>
+                <div class="geo-dist-simple">
+                  <div class="geo-row">
+                    <div class="geo-country-label">🇯🇵 Japan</div>
+                    <div class="geo-progress-container">
+                      <div class="geo-bar" style="width: 30%;"></div>
+                    </div>
+                    <span class="geo-pct">30%</span>
+                  </div>
+                  <div class="geo-row">
+                    <div class="geo-country-label">🇧🇷 Brazil</div>
+                    <div class="geo-progress-container">
+                      <div class="geo-bar" style="width: 25%;"></div>
+                    </div>
+                    <span class="geo-pct">25%</span>
+                  </div>
+                  <div class="geo-row">
+                    <div class="geo-country-label">🇫🇷 France</div>
+                    <div class="geo-progress-container">
+                      <div class="geo-bar" style="width: 20%;"></div>
+                    </div>
+                    <span class="geo-pct">20%</span>
+                  </div>
+                  <div class="geo-row">
+                    <div class="geo-country-label">🇨🇳 China</div>
+                    <div class="geo-progress-container">
+                      <div class="geo-bar" style="width: 15%;"></div>
+                    </div>
+                    <span class="geo-pct">15%</span>
+                  </div>
+                  <div class="geo-row">
+                    <div class="geo-country-label">Others</div>
+                    <div class="geo-progress-container">
+                      <div class="geo-bar" style="width: 10%;"></div>
+                    </div>
+                    <span class="geo-pct">10%</span>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            
+          </div>
+        </section>
+        
+        <!-- SCHEDULE VIEW -->
+        <section class="view-panel" id="view-schedule">
+          <div class="schedule-layout-grid">
+            
+            <!-- Calendar Matrix Area -->
+            <div class="calendar-container glass-panel">
+              <div class="calendar-header-controls">
+                <div class="calendar-week-nav">
+                  <button class="icon-btn-secondary" id="prev-week-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                  <h3 id="current-week-label">Week of June 22 - June 28, 2026</h3>
+                  <button class="icon-btn-secondary" id="next-week-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                
+                <!-- Timezone Simulator (Research Feature) -->
+                <div class="timezone-simulator-card">
+                  <label for="timezone-selector"><i class="fa-solid fa-sliders text-primary"></i> Timezone Perspective:</label>
+                  <select id="timezone-selector" class="dropdown-style">
+                    <option value="Asia/Tokyo" selected>Teacher (JST, GMT+9)</option>
+                    <option value="America/Sao_Paulo">Mateo (BRT, GMT-3)</option>
+                    <option value="Europe/Paris">Chloe / Hans (CEST, GMT+2)</option>
+                    <option value="Europe/London">Student in London (BST, GMT+1)</option>
+                    <option value="America/New_York">Student in New York (EDT, GMT-4)</option>
+                    <option value="Asia/Shanghai">Li Wei (CST, GMT+8)</option>
+                  </select>
+                </div>
+              </div>
+              
+              <!-- Live Perspective Warning -->
+              <div class="perspective-indicator hidden" id="perspective-indicator-msg">
+                <i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Viewing schedule in <strong>Student Timezone (<span id="perspective-tz-name">America/Sao_Paulo</span>)</strong>. Times shifted by <span id="perspective-tz-offset">-12 hours</span>. Toggling slots is disabled in student view.
+              </div>
+              
+              <div class="calendar-grid-wrapper">
+                <div class="calendar-grid" id="calendar-grid">
+                  <!-- Rendered dynamically by JS -->
+                </div>
+              </div>
+              
+              <div class="calendar-legend">
+                <span class="legend-item"><span class="legend-dot booked"></span> Booked Lesson</span>
+                <span class="legend-item"><span class="legend-dot available"></span> Available Slot</span>
+                <span class="legend-item"><span class="legend-dot pending"></span> Pending Approval</span>
+                <span class="legend-item"><span class="legend-dot unavailable"></span> Closed / Blocked</span>
+              </div>
+            </div>
+            
+            <!-- Schedule Controls Sidebar -->
+            <div class="schedule-sidebar flex-col gap-6">
+              
+              <!-- Quick Actions -->
+              <div class="glass-panel">
+                <h3>Availability Presets</h3>
+                <p class="section-desc">Quickly open standard time slots for the selected week in your local timezone.</p>
+                <div class="preset-buttons-grid">
+                  <button class="btn btn-outline-primary btn-full-width" id="preset-morning-btn"><i class="fa-solid fa-sun"></i> Morning Rush (08:00 - 12:00)</button>
+                  <button class="btn btn-outline-primary btn-full-width" id="preset-evening-btn"><i class="fa-solid fa-moon"></i> Evening Peak (18:00 - 22:00)</button>
+                  <button class="btn btn-outline-primary btn-full-width" id="preset-full-btn"><i class="fa-solid fa-briefcase"></i> Full Weekday (09:00 - 17:00)</button>
+                  <button class="btn btn-danger btn-outline btn-full-width" id="clear-all-slots-btn"><i class="fa-solid fa-trash-can"></i> Block All Slots</button>
+                </div>
+              </div>
+              
+              <!-- Booking Policy Settings -->
+              <div class="glass-panel">
+                <h3>Booking Rules</h3>
+                <div class="form-group margin-top-4">
+                  <label class="form-label">Minimum Booking Notice</label>
+                  <select class="dropdown-style w-full">
+                    <option value="12">12 hours in advance (Recommended)</option>
+                    <option value="24" selected>24 hours in advance</option>
+                    <option value="48">48 hours in advance</option>
+                  </select>
+                  <span class="form-help">Prevents last-minute bookings from international students.</span>
+                </div>
+                
+                <div class="form-group margin-top-4">
+                  <label class="form-label">Weekly Hour Cap</label>
+                  <input type="number" class="input-style w-full" value="35" min="1" max="80">
+                  <span class="form-help">Max teaching hours before blocking all remaining slots.</span>
+                </div>
+                
+                <div class="form-group margin-top-4">
+                  <label class="toggle-container">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Auto-accept regular students' bookings</span>
+                  </label>
+                </div>
+              </div>
+              
+              <!-- Timezone Quick Reference -->
+              <div class="glass-panel">
+                <h3>Global Timezone Reference</h3>
+                <p class="section-desc">Current local times for your active students:</p>
+                <div class="tz-quick-ref-list" id="sidebar-tz-ref-list">
+                  <!-- Dynamic content loaded via JS -->
+                </div>
+              </div>
+              
+            </div>
+            
+          </div>
+        </section>
+        
+        <!-- STUDENTS VIEW (CRM) -->
+        <section class="view-panel" id="view-students">
+          
+          <div class="glass-panel margin-bottom-6">
+            <div class="students-filter-row">
+              <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="student-search-input" placeholder="Search by name, country, level, or timezone...">
+              </div>
+              <div class="filters-group">
+                <select id="student-level-filter" class="dropdown-style">
+                  <option value="all">All English Levels</option>
+                  <option value="A">Beginner (A1-A2)</option>
+                  <option value="B">Intermediate (B1-B2)</option>
+                  <option value="C">Advanced (C1-C2)</option>
+                </select>
+                <select id="student-country-filter" class="dropdown-style">
+                  <option value="all">All Countries</option>
+                  <option value="Japan">Japan 🇯🇵</option>
+                  <option value="Brazil">Brazil 🇧🇷</option>
+                  <option value="France">France 🇫🇷</option>
+                  <option value="Germany">Germany 🇩🇪</option>
+                  <option value="Nigeria">Nigeria 🇳🇬</option>
+                  <option value="China">China 🇨🇳</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Students Grid -->
+          <div class="students-cards-grid" id="students-grid">
+            <!-- Rendered dynamically by JS -->
+          </div>
+        </section>
+        
+        <!-- EARNINGS & INSIGHTS VIEW -->
+        <section class="view-panel" id="view-insights">
+          <div class="insights-top-row stats-grid">
+            
+            <div class="stat-card glass-panel">
+              <div class="stat-icon-wrapper success"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+              <div class="stat-data">
+                <span class="stat-val">$30.00 / hr</span>
+                <span class="stat-lbl">Average Hourly Rate</span>
+                <span class="stat-trend trend-up"><i class="fa-solid fa-arrow-up"></i> Base rate: $25.00</span>
+              </div>
+            </div>
+            
+            <div class="stat-card glass-panel">
+              <div class="stat-icon-wrapper primary"><i class="fa-solid fa-calendar-check"></i></div>
+              <div class="stat-data">
+                <span class="stat-val">114 lessons</span>
+                <span class="stat-lbl">Completed (This Month)</span>
+                <span class="stat-trend trend-up"><i class="fa-solid fa-arrow-up"></i> +14% vs last month</span>
+              </div>
+            </div>
+            
+            <div class="stat-card glass-panel">
+              <div class="stat-icon-wrapper info"><i class="fa-solid fa-award"></i></div>
+              <div class="stat-data">
+                <span class="stat-val">98.2%</span>
+                <span class="stat-lbl">Student Retention Rate</span>
+                <span class="stat-trend"><i class="fa-solid fa-circle-check"></i> Goal is > 95%</span>
+              </div>
+            </div>
+            
+          </div>
+          
+          <div class="insights-layout-grid">
+            <!-- Weekly Earnings Column Chart (Built in CSS) -->
+            <div class="glass-panel flex-col">
+              <h3>Monthly Income Growth</h3>
+              <p class="section-desc">Earning trends over the last 6 months.</p>
+              
+              <div class="bar-chart-container">
+                <div class="bar-column">
+                  <div class="bar-fill" style="height: 60%;" data-value="$2,100"></div>
+                  <span class="bar-label">Jan</span>
+                </div>
+                <div class="bar-column">
+                  <div class="bar-fill" style="height: 68%;" data-value="$2,450"></div>
+                  <span class="bar-label">Feb</span>
+                </div>
+                <div class="bar-column">
+                  <div class="bar-fill" style="height: 80%;" data-value="$2,900"></div>
+                  <span class="bar-label">Mar</span>
+                </div>
+                <div class="bar-column">
+                  <div class="bar-fill" style="height: 75%;" data-value="$2,700"></div>
+                  <span class="bar-label">Apr</span>
+                </div>
+                <div class="bar-column">
+                  <div class="bar-fill" style="height: 92%;" data-value="$3,200"></div>
+                  <span class="bar-label">May</span>
+                </div>
+                <div class="bar-column">
+                  <div class="bar-fill highlight" style="height: 100%;" data-value="$3,420"></div>
+                  <span class="bar-label">Jun (Est.)</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Target Audience Peak Booking Times -->
+            <div class="glass-panel">
+              <h3>Peak Booking Timezones</h3>
+              <p class="section-desc">Identify the best times to open slots based on booking requests from different regions.</p>
+              
+              <div class="peak-times-list">
+                <div class="peak-item">
+                  <div class="peak-header">
+                    <span class="peak-region">East Asia & Oceania (JST/CST)</span>
+                    <span class="peak-hours">18:00 - 22:00 Your Time</span>
+                  </div>
+                  <div class="peak-progress-container">
+                    <div class="peak-progress-bar high" style="width: 85%;"></div>
+                  </div>
+                  <span class="peak-intensity">Very High Booking Likelihood (Evening Rush)</span>
+                </div>
+                
+                <div class="peak-item">
+                  <div class="peak-header">
+                    <span class="peak-region">Western Europe (GMT/CET)</span>
+                    <span class="peak-hours">15:00 - 19:00 Your Time</span>
+                  </div>
+                  <div class="peak-progress-container">
+                    <div class="peak-progress-bar medium" style="width: 60%;"></div>
+                  </div>
+                  <span class="peak-intensity">Medium Booking Likelihood (European Lunch & Afternoon)</span>
+                </div>
+                
+                <div class="peak-item">
+                  <div class="peak-header">
+                    <span class="peak-region">Latin America (GMT-3/GMT-5)</span>
+                    <span class="peak-hours">07:00 - 11:00 Your Time</span>
+                  </div>
+                  <div class="peak-progress-container">
+                    <div class="peak-progress-bar high" style="width: 78%;"></div>
+                  </div>
+                  <span class="peak-intensity">High Booking Likelihood (Latin American Evening Study)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- SETTINGS VIEW -->
+        <section class="view-panel" id="view-settings">
+          <div class="settings-container glass-panel">
+            <h2>Account & Preferences</h2>
+            
+            <form class="settings-form" id="settings-form" onsubmit="event.preventDefault();">
+              <div class="form-row">
+                <div class="form-group flex-1">
+                  <label class="form-label" for="setting-name">Display Name</label>
+                  <input type="text" id="setting-name" class="input-style" value="Prof. Sarah Miller">
+                </div>
+                <div class="form-group flex-1">
+                  <label class="form-label" for="setting-email">Email Address</label>
+                  <input type="email" id="setting-email" class="input-style" value="s.miller@originanecdote.edu">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="setting-bio">Teacher Bio (Visible to Students)</label>
+                <textarea id="setting-bio" class="input-style text-area-style" rows="4">Hi! I am a certified ESL teacher with over 8 years of experience helping students achieve fluency. I specialize in business English, presentation coaching, and IELTS exam preparation. Looking forward to working with you!</textarea>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group flex-1">
+                  <label class="form-label" for="setting-timezone">Base Timezone (Default for scheduling)</label>
+                  <select id="setting-timezone" class="dropdown-style w-full">
+                    <option value="Asia/Tokyo" selected>Asia/Tokyo (JST, GMT+9)</option>
+                    <option value="Europe/London">Europe/London (GMT/BST)</option>
+                    <option value="America/New_York">America/New_York (EST/EDT)</option>
+                    <option value="Europe/Paris">Europe/Paris (CET/CEST)</option>
+                  </select>
+                </div>
+                <div class="form-group flex-1">
+                  <label class="form-label" for="setting-currency">Earnings Currency</label>
+                  <select id="setting-currency" class="dropdown-style w-full">
+                    <option value="USD" selected>USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="GBP">GBP (£)</option>
+                    <option value="JPY">JPY (¥)</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="settings-divider"></div>
+              
+              <h3>Video Classroom Integrations</h3>
+              <p class="section-desc">Connect tools to automatically generate classroom meeting links when a student books.</p>
+              
+              <div class="integrations-list">
+                <div class="integration-item">
+                  <div class="integration-info">
+                    <div class="integration-icon zoom"><i class="fa-solid fa-video"></i></div>
+                    <div class="integration-details">
+                      <h4>Zoom Meetings</h4>
+                      <span class="integration-status connected">Connected as s.miller@zoom.com</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-sm btn-outline-secondary">Disconnect</button>
+                </div>
+                
+                <div class="integration-item">
+                  <div class="integration-info">
+                    <div class="integration-icon gmeet"><i class="fa-solid fa-camera"></i></div>
+                    <div class="integration-details">
+                      <h4>Google Meet</h4>
+                      <span class="integration-status disconnected">Not connected</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-sm btn-outline-primary">Connect Account</button>
+                </div>
+              </div>
+              
+              <div class="settings-divider"></div>
+              
+              <div class="form-actions">
+                <button type="button" class="btn btn-outline-secondary">Cancel</button>
+                <button type="button" class="btn btn-primary" id="save-settings-btn">Save Changes</button>
+              </div>
+            </form>
+          </div>
+        </section>
+        
+      </div>
+      
+    </main>
+  </div>
+  
+  <!-- Reschedule Modal -->
+  <div class="modal hidden" id="reschedule-modal">
+    <div class="modal-content glass-panel">
+      <div class="modal-header">
+        <h3>Suggest Reschedule Time</h3>
+        <button class="close-modal-btn" id="close-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <p>Propose a different time slot in your timezone. We will automatically translate it for the student and send them a proposal notification.</p>
+        <div class="form-group margin-top-4">
+          <label class="form-label" for="resched-date">Proposed Date</label>
+          <input type="date" id="resched-date" class="input-style w-full" value="2026-06-26">
+        </div>
+        <div class="form-group margin-top-4">
+          <label class="form-label" for="resched-time">Proposed Time (Your Local JST)</label>
+          <select id="resched-time" class="dropdown-style w-full">
+            <!-- populated by JS -->
+          </select>
+        </div>
+        <div class="reschedule-preview-timezone margin-top-4">
+          <p><strong>Student Perspective:</strong></p>
+          <p id="student-perspective-preview">Mateo Silva (GMT-3) will receive this as: <strong>Friday @ 05:00 AM</strong></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancel-modal-btn">Cancel</button>
+        <button class="btn btn-primary" id="submit-resched-btn">Send Proposal</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Custom Alert Toast -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- App JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
