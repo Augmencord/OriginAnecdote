@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OriginAnecdote - Developer's Log</title>
+  <style>
+    /* --- CSS for Print PDF Styling --- */
+    @page {
+      size: A4;
+      margin: 20mm 15mm 20mm 15mm;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #2D3748;
+      line-height: 1.6;
+      font-size: 11pt;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #1A202C;
+      font-weight: 700;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 24pt;
+      border-bottom: 2px solid #319795;
+      padding-bottom: 6px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 16pt;
+      border-bottom: 1px solid #E2E8F0;
+      padding-bottom: 4px;
+      margin-top: 30px;
+      margin-bottom: 12px;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      font-size: 12pt;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      color: #2C7A7B;
+      page-break-after: avoid;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
+    /* List styling */
+    ul, ol {
+      margin-top: 0;
+      margin-bottom: 12px;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    /* Blocks and code */
+    pre, code {
+      font-family: Consolas, Monaco, "Andale Mono", monospace;
+      font-size: 9pt;
+      background-color: #F7FAFC;
+      border: 1px solid #EDF2F7;
+      border-radius: 4px;
+    }
+
+    pre {
+      padding: 10px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin-bottom: 15px;
+    }
+
+    code {
+      padding: 2px 4px;
+      background-color: #EDF2F7;
+    }
+
+    /* Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      page-break-inside: avoid;
+    }
+
+    th, td {
+      border: 1px solid #E2E8F0;
+      padding: 8px 10px;
+      text-align: left;
+      font-size: 9.5pt;
+    }
+
+    th {
+      background-color: #F7FAFC;
+      font-weight: 600;
+      color: #4A5568;
+    }
+
+    tr:nth-child(even) {
+      background-color: #FDFDFD;
+    }
+
+    /* Custom Layout Components */
+    .header-box {
+      margin-bottom: 40px;
+      border-left: 4px solid #319795;
+      padding-left: 15px;
+    }
+
+    .metadata-table {
+      margin-bottom: 30px;
+    }
+
+    .metadata-table td {
+      border: none;
+      padding: 4px 0;
+    }
+
+    .metadata-table td.label {
+      font-weight: 600;
+      width: 120px;
+      color: #718096;
+    }
+
+    .prompt-box {
+      background-color: #EDFDFD;
+      border-left: 4px solid #319795;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 0 4px 4px 0;
+      font-style: italic;
+    }
+
+    .prompt-header {
+      font-weight: 600;
+      color: #2C7A7B;
+      font-size: 9.5pt;
+      margin-bottom: 4px;
+      font-style: normal;
+    }
+
+    .page-break {
+      page-break-after: always;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 8pt;
+      color: #A0AEC0;
+      border-top: 1px solid #E2E8F0;
+      padding-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cover Page Details / Header -->
+  <div class="header-box">
+    <h1>OriginAnecdote</h1>
+    <h3 style="color: #4A5568; margin-top: -15px; margin-bottom: 20px; font-weight: 500;">
+      Developer's Log & System Documentation
+    </h3>
+    <table class="metadata-table">
+      <tr>
+        <td class="label">Project Title:</td>
+        <td>OriginAnecdote International Scheduling Web Application</td>
+      </tr>
+      <tr>
+        <td class="label">Developer:</td>
+        <td>Antigravity (AI Coding Assistant by Google DeepMind)</td>
+      </tr>
+      <tr>
+        <td class="label">Client:</td>
+        <td>ESL / Language Instructors & Teachers</td>
+      </tr>
+      <tr>
+        <td class="label">Date:</td>
+        <td>June 25, 2026</td>
+      </tr>
+      <tr>
+        <td class="label">Status:</td>
+        <td>Completed & Hosted Live</td>
+      </tr>
+    </table>
+  </div>
+
+  <h2>1. Executive Summary</h2>
+  <p>
+    <strong>OriginAnecdote</strong> is a premium, client-side single-page dashboard application built specifically for educators conducting classes for international students. The project tackles timezone differences and calendar visibility issues associated with global tutoring, offering booking request verification, automated local student clock checks, dynamic timezone simulation, and visual student analytics.
+  </p>
+
+  <h2>2. Research & Requirements Phase</h2>
+  <p>
+    Before starting development, research was conducted on leading online tutor dashboards such as Preply and italki. These platforms provide teachers with:
+  </p>
+  <ul>
+    <li><strong>Automatic Timezone Shifting</strong>: Translating slots automatically based on student and teacher account regions.</li>
+    <li><strong>Recurring Weekly Availabilities</strong>: Allowing teachers to open set hours to structure their weeks.</li>
+    <li><strong>Safety Notice Policies</strong>: Preventing last-minute bookings (e.g. requiring 12-24 hours notice) to avoid scheduling conflicts.</li>
+  </ul>
+  <p>
+    <strong>OriginAnecdote</strong> addresses these areas with specific frontend modules:
+  </p>
+  <ol>
+    <li>An <strong>Interactive Timezone Simulator</strong> allowing the teacher to view their calendar from the perspective of students in Tokyo, São Paulo, Paris, London, New York, or Beijing.</li>
+    <li>An <strong>Alert Helper</strong> indicating whether a proposed student request lands in a reasonable study hour (daytime) or early morning/late night for the student.</li>
+    <li><strong>Live Student Clocks</strong> displaying real-time local times on CRM cards, complete with visual alerts indicating when students are likely sleeping.</li>
+  </ol>
+
+  <div class="page-break"></div>
+
+  <h2>3. System Architecture & Tech Stack</h2>
+  <p>
+    To ensure instantaneous load times and simple deployment, the system is designed as a standalone static web application:
+  </p>
+  <ul>
+    <li><strong>HTML5 structure</strong>: Semantic markup dividing the viewport into a sticky navigation sidebar and dynamic content views.</li>
+    <li><strong>Vanilla CSS (Responsive Layouts)</strong>: A global design system using HSL color variables. Uses a dark glassmorphism styling approach, containing linear gradients, backdrop-filters, custom scrollbars, and micro-animations.</li>
+    <li><strong>Vanilla JavaScript (ES6 Modules)</strong>: Client-side model-view-controller (MVC) logic. Manages states for calendar availability, timezone calculation offsets, notifications, student search queries, and modal rescheduling dialogs.</li>
+  </ul>
+
+  <h2>4. Core Code Modules</h2>
+
+  <h3>4.1 HTML Structure (index.html)</h3>
+  <p>
+    Defines the sidebar, headers, and five distinct view panels:
+  </p>
+  <ul>
+    <li><strong>Dashboard</strong>: Displays metric summaries, the upcoming active classroom card, and the booking requests list.</li>
+    <li><strong>Schedule & Slots</strong>: Embeds the week grid and availability controls.</li>
+    <li><strong>My Students</strong>: Lists student details with search and level filters.</li>
+    <li><strong>Earnings & Insights</strong>: Features monthly earnings history and timezone demand progress bars.</li>
+    <li><strong>Settings</strong>: Contains account fields and video classroom integrations.</li>
+  </ul>
+
+  <h3>4.2 CSS Design Language (style.css)</h3>
+  <p>
+    Implements a responsive, dark glassmorphism system using high-end HSL styling variables:
+  </p>
+  <pre>
+:root {
+  --bg-base: hsl(222, 47%, 8%); /* Deep space blue */
+  --panel-bg: hsla(222, 30%, 15%, 0.55);
+  --color-primary: hsl(174, 90%, 42%); /* Neon Teal */
+  --color-secondary: hsl(262, 85%, 66%); /* Neon Purple */
+  --color-success: hsl(145, 80%, 45%); /* Neon Green */
+  --color-warning: hsl(38, 95%, 55%); /* Gold */
+  --color-danger: hsl(355, 85%, 55%); /* Coral Rose */
+}
+  </pre>
+
+  <h3>4.3 JavaScript State Controller (app.js)</h3>
+  <p>
+    Coordinates time translations, updates clocks every second, and updates availability grids dynamically. Here is the timezone translation helper:
+  </p>
+  <pre>
+function translateTime(hour, sourceTz, targetTz) {
+  const sourceOffset = TZ_OFFSETS[sourceTz] || 0;
+  const targetOffset = TZ_OFFSETS[targetTz] || 0;
+  const diff = targetOffset - sourceOffset;
+  
+  let translatedHour = hour + diff;
+  let dayOffset = 0;
+
+  if (translatedHour >= 24) {
+    translatedHour -= 24;
+    dayOffset = 1;
+  } else if (translatedHour < 0) {
+    translatedHour += 24;
+    dayOffset = -1;
+  }
+  return { hour: translatedHour, dayOffset: dayOffset };
+}
+  </pre>
+
+  <div class="page-break"></div>
+
+  <h2>5. Step-by-Step Build Chronology</h2>
+  <ol>
+    <li><strong>Research & Planning</strong>: Analyzed teacher scheduling requirements and submitted an implementation plan.</li>
+    <li><strong>Structural Skeleton</strong>: Built the standard single-page app structure (`index.html`) using semantic divisions.</li>
+    <li><strong>Visual System Polish</strong>: Injected variables and responsive grids in `style.css` using backdrop-filter blur definitions.</li>
+    <li><strong>State Controls</strong>: Linked standard JS state logic (`app.js`) to generate calendar slots dynamically and enable active timezone transformations.</li>
+    <li><strong>Local Verification</strong>: Deployed a browser subagent locally to test tab controls, slot toggles, booking approvals, and notes storage.</li>
+    <li><strong>GitHub Pages Hosting</strong>: Configured local Git, created the GitHub repository `Augmencord/OriginAnecdote`, pushed the main branch, and triggered the pages deployment via API.</li>
+    <li><strong>Live Verification</strong>: Re-ran the browser test directly against the public URL to verify assets.</li>
+  </ol>
+
+  <h2>6. Compiled Prompts Chronicle</h2>
+  <p>
+    Below are all the prompts submitted by the user to build the application, arranged in chronological order:
+  </p>
+
+  <div class="prompt-box">
+    <div class="prompt-header">Prompt #1 (Initial System Request):</div>
+    "create a basic front end application of an Edtech in which you have the functionality of booking classes and it shouws your available slots. Its hould be centered around teachers, means the application if for teachers. research about all the available application for teachers specially the one that deals with international students and then make the front end."
+  </div>
+
+  <div class="prompt-box">
+    <div class="prompt-header">Prompt #2 (Application Renaming):</div>
+    "change the name of the application to OriginAnecdote rest follow the same implementation plan as mentioned above"
+  </div>
+
+  <div class="prompt-box">
+    <div class="prompt-header">Prompt #3 (Hosting Request):</div>
+    "host it on github if github provides free hosting for a web application that you created"
+  </div>
+
+  <div class="prompt-box">
+    <div class="prompt-header">Prompt #4 (Documentation & PDF Compilation):</div>
+    "create a developers log Pdf documentation in the same folder mentioning the process of how you built this frontend application. Also compile all the prompts I sent."
+  </div>
+
+  <div class="footer">
+    OriginAnecdote System Log • Generated by Antigravity AI • Confidential
+  </div>
+
+</body>
+</html>
